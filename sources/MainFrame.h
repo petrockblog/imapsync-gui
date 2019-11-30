@@ -43,17 +43,17 @@ namespace ui
 
 		protected:
 			wxStaticText* m_staticText1;
-			wxTextCtrl* m_textCtrl1;
+			wxTextCtrl* source_name_;
 			wxStaticText* m_staticText2;
-			wxTextCtrl* m_textCtrl2;
+			wxTextCtrl* source_password_;
 			wxStaticText* m_staticText3;
-			wxTextCtrl* m_textCtrl3;
+			wxTextCtrl* source_server_;
 			wxStaticText* m_staticText11;
-			wxTextCtrl* m_textCtrl11;
+			wxTextCtrl* destination_name_;
 			wxStaticText* m_staticText21;
-			wxTextCtrl* m_textCtrl21;
+			wxTextCtrl* destination_password_;
 			wxStaticText* m_staticText31;
-			wxTextCtrl* m_textCtrl31;
+			wxTextCtrl* destination_server_;
 			wxCheckBox* m_checkBox_dryrun;
 			wxCheckBox* m_checkBox_loginonly;
 			wxCheckBox* m_checkBox_foldersizes;

@@ -27,22 +27,22 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_staticText1->Wrap( -1 );
 	gSizer1->Add( m_staticText1, 0, wxALL, 5 );
 
-	m_textCtrl1 = new wxTextCtrl( sbSizer_source->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	gSizer1->Add( m_textCtrl1, 0, wxALL|wxEXPAND, 5 );
+	source_name_ = new wxTextCtrl( sbSizer_source->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
+	gSizer1->Add( source_name_, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText2 = new wxStaticText( sbSizer_source->GetStaticBox(), wxID_ANY, wxT("Password"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText2->Wrap( -1 );
 	gSizer1->Add( m_staticText2, 0, wxALL, 5 );
 
-	m_textCtrl2 = new wxTextCtrl( sbSizer_source->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	gSizer1->Add( m_textCtrl2, 0, wxALL|wxEXPAND, 5 );
+	source_password_ = new wxTextCtrl( sbSizer_source->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD|wxTAB_TRAVERSAL );
+	gSizer1->Add( source_password_, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText3 = new wxStaticText( sbSizer_source->GetStaticBox(), wxID_ANY, wxT("Server"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText3->Wrap( -1 );
 	gSizer1->Add( m_staticText3, 0, wxALL, 5 );
 
-	m_textCtrl3 = new wxTextCtrl( sbSizer_source->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	gSizer1->Add( m_textCtrl3, 0, wxALL|wxEXPAND, 5 );
+	source_server_ = new wxTextCtrl( sbSizer_source->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
+	gSizer1->Add( source_server_, 0, wxALL|wxEXPAND, 5 );
 
 
 	sbSizer_source->Add( gSizer1, 1, wxEXPAND, 5 );
@@ -60,22 +60,22 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_staticText11->Wrap( -1 );
 	gSizer11->Add( m_staticText11, 0, wxALL, 5 );
 
-	m_textCtrl11 = new wxTextCtrl( sbSizer_destination->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	gSizer11->Add( m_textCtrl11, 0, wxALL|wxEXPAND, 5 );
+	destination_name_ = new wxTextCtrl( sbSizer_destination->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
+	gSizer11->Add( destination_name_, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText21 = new wxStaticText( sbSizer_destination->GetStaticBox(), wxID_ANY, wxT("Password"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText21->Wrap( -1 );
 	gSizer11->Add( m_staticText21, 0, wxALL, 5 );
 
-	m_textCtrl21 = new wxTextCtrl( sbSizer_destination->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	gSizer11->Add( m_textCtrl21, 0, wxALL|wxEXPAND, 5 );
+	destination_password_ = new wxTextCtrl( sbSizer_destination->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PASSWORD|wxTAB_TRAVERSAL );
+	gSizer11->Add( destination_password_, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText31 = new wxStaticText( sbSizer_destination->GetStaticBox(), wxID_ANY, wxT("Server"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText31->Wrap( -1 );
 	gSizer11->Add( m_staticText31, 0, wxALL, 5 );
 
-	m_textCtrl31 = new wxTextCtrl( sbSizer_destination->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	gSizer11->Add( m_textCtrl31, 0, wxALL|wxEXPAND, 5 );
+	destination_server_ = new wxTextCtrl( sbSizer_destination->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
+	gSizer11->Add( destination_server_, 0, wxALL|wxEXPAND, 5 );
 
 
 	sbSizer_destination->Add( gSizer11, 1, wxEXPAND, 5 );
@@ -91,16 +91,16 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	gbSizer1->SetFlexibleDirection( wxBOTH );
 	gbSizer1->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
-	m_checkBox_dryrun = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Dry run"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_checkBox_dryrun = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Dry run"), wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
 	gbSizer1->Add( m_checkBox_dryrun, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 
-	m_checkBox_loginonly = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Login only"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_checkBox_loginonly = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Login only"), wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
 	gbSizer1->Add( m_checkBox_loginonly, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 
-	m_checkBox_foldersizes = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Just folder sizes"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_checkBox_foldersizes = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Just folder sizes"), wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
 	gbSizer1->Add( m_checkBox_foldersizes, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 
-	m_checkBox_foldersonly = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Sync folders only"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_checkBox_foldersonly = new wxCheckBox( sbSizer_parameters->GetStaticBox(), wxID_ANY, wxT("Sync folders only"), wxDefaultPosition, wxDefaultSize, 0|wxTAB_TRAVERSAL );
 	gbSizer1->Add( m_checkBox_foldersonly, wxGBPosition( 0, 3 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 
 

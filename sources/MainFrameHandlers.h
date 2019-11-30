@@ -16,6 +16,7 @@ class MainFrameHandlers : public MainFrame {
  private:
   virtual void OnOpen( wxCommandEvent& event ) override;
   virtual void OnSave( wxCommandEvent& event ) override;
+  std::string encryptDecrypt(std::string toEncrypt);
 };
 
 }
