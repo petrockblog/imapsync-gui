@@ -19,12 +19,14 @@
 #include <wx/sizer.h>
 #include <wx/statbox.h>
 #include <wx/checkbox.h>
-#include <wx/gbsizer.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
 #include <wx/button.h>
 #include <wx/gauge.h>
+#include <wx/panel.h>
+#include <wx/html/htmlwin.h>
+#include <wx/splitter.h>
 #include <wx/statusbr.h>
 #include <wx/menu.h>
 #include <wx/frame.h>
@@ -42,6 +44,8 @@ namespace ui
 		private:
 
 		protected:
+			wxSplitterWindow* m_splitter1;
+			wxPanel* m_panel1;
 			wxStaticText* m_staticText1;
 			wxTextCtrl* source_name_;
 			wxStaticText* m_staticText2;
@@ -58,8 +62,10 @@ namespace ui
 			wxCheckBox* m_checkBox_loginonly;
 			wxCheckBox* m_checkBox_foldersizes;
 			wxCheckBox* m_checkBox_foldersonly;
-			wxButton* m_button_syncabort;
-			wxGauge* m_gauge_progress;
+			wxButton* m_button_syncabort1;
+			wxGauge* m_gauge_progress1;
+			wxPanel* m_panel2;
+			wxHtmlWindow* m_text_log_;
 			wxStatusBar* m_statusBar;
 			wxMenu* m_menu_file;
 			wxMenu* m_menu_about;
@@ -67,14 +73,21 @@ namespace ui
 			// Virtual event handlers, overide them in your derived class
 			virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
 			virtual void OnSave( wxCommandEvent& event ) { event.Skip(); }
+			virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 
 
 		public:
 			wxMenuBar* m_menubar;
 
-			MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("IMAP Sync GUI  -  by petrockblock.com"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 473,466 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+			MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("IMAP Sync GUI  -  by petrockblock.com"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 473,560 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 			~MainFrame();
+
+			void m_splitter1OnIdle( wxIdleEvent& )
+			{
+				m_splitter1->SetSashPosition( 0 );
+				m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( MainFrame::m_splitter1OnIdle ), NULL, this );
+			}
 
 	};
 

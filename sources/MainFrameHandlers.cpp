@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iomanip>
 #include <nlohmann/json.hpp>
+#include <wx/wx.h>
 
 #include "MainFrameHandlers.h"
 
@@ -15,7 +16,9 @@ ui::MainFrameHandlers::MainFrameHandlers(wxWindow *parent,
                                          const wxString &title,
                                          const wxPoint &pos,
                                          const wxSize &size,
-                                         long style) : MainFrame(parent, id, title, pos, size, style) {}
+                                         long style) : MainFrame(parent, id, title, pos, size, style) {
+  m_text_log_->SetPage("Hello!<br>");
+}
 
 void ui::MainFrameHandlers::OnOpen(wxCommandEvent &event) {
   wxFileDialog
@@ -61,26 +64,35 @@ void ui::MainFrameHandlers::OnSave(wxCommandEvent &event) {
   if (saveFileDialog.ShowModal() == wxID_CANCEL)
     return;
 
-  const nlohmann::json toBesafed = {
-      {"source", {
-          {"name", std::string(source_name_->GetValue().mb_str())},
-          {"password", encryptDecrypt(std::string(source_password_->GetValue().mb_str()))},
-          {"server", std::string(source_server_->GetValue().mb_str())}
-      }},
-      {"destination", {
-          {"name", std::string(destination_name_->GetValue().mb_str())},
-          {"password", encryptDecrypt(std::string(destination_password_->GetValue().mb_str()))},
-          {"server", std::string(destination_server_->GetValue().mb_str())}
-      }},
-      {"parameters", {
-        {"dryrun", m_checkBox_dryrun->GetValue()},
-        {"loginonly", m_checkBox_loginonly->GetValue()},
-        {"onlyfoldersizes", m_checkBox_foldersizes->GetValue()},
-        {"onlyfolderssync", m_checkBox_foldersonly->GetValue()}
-      }}
-  };
+  try {
+    const nlohmann::json toBesafed = {
+        {"source", {
+            {"name", std::string(source_name_->GetValue().mb_str())},
+            {"password", encryptDecrypt(std::string(source_password_->GetValue().mb_str()))},
+            {"server", std::string(source_server_->GetValue().mb_str())}
+        }},
+        {"destination", {
+            {"name", std::string(destination_name_->GetValue().mb_str())},
+            {"password", encryptDecrypt(std::string(destination_password_->GetValue().mb_str()))},
+            {"server", std::string(destination_server_->GetValue().mb_str())}
+        }},
+        {"parameters", {
+            {"dryrun", m_checkBox_dryrun->GetValue()},
+            {"loginonly", m_checkBox_loginonly->GetValue()},
+            {"onlyfoldersizes", m_checkBox_foldersizes->GetValue()},
+            {"onlyfolderssync", m_checkBox_foldersonly->GetValue()}
+        }}
+    };
 
-  std::ofstream configFile(saveFileDialog.GetPath());
-  configFile << std::setw(4) << toBesafed << std::endl;
-  configFile.close();
+    std::ofstream configFile(saveFileDialog.GetPath());
+    configFile << std::setw(4) << toBesafed << std::endl;
+    configFile.close();
+
+    wxMessageBox("Successfully saved configuration to file.", "Info", wxOK_DEFAULT, this);
+  } catch (std::exception exc) {
+    wxMessageBox("Something went wrong while saving the configuration to file.", "ERROR", wxOK_DEFAULT, this);
+  }
+}
+void ui::MainFrameHandlers::AddLineToLog(std::string logMessage) {
+  m_text_log_->AppendToPage(wxString(logMessage + "<br>"));
 }

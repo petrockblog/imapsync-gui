@@ -12,6 +12,7 @@ namespace ui {
 class MainFrameHandlers : public MainFrame {
  public:
   MainFrameHandlers(wxWindow *parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("IMAP Sync GUI  -  by petrockblock.com"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 473,466 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL);
+  void AddLineToLog(std::string logMessage);
 
  private:
   virtual void OnOpen( wxCommandEvent& event ) override;

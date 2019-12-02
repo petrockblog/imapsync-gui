@@ -10,12 +10,18 @@ set(JSON_Install OFF CACHE INTERNAL "")
 # unintended consequences that will break the build.  It's generally
 # discouraged (although not necessarily well documented as such) to use
 # include(...) for pulling in other CMake projects anyways.
-add_subdirectory(../libs/json ../cmake-build-${CMAKE_BUILD_TYPE})
+add_subdirectory(../libs/json ../cmake-build-${CMAKE_BUILD_TYPE}/libs/json)
 
-find_package(wxWidgets REQUIRED COMPONENTS net core base)
+# disable building PLOG samples
+set(PLOG_BUILD_SAMPLES OFF CACHE INTERNAL "")
+add_subdirectory(../libs/plog ../cmake-build-${CMAKE_BUILD_TYPE}/libs/plog)
+include_directories(../libs/plog/include)
+
+find_package(wxWidgets REQUIRED COMPONENTS net core base html)
 include(${wxWidgets_USE_FILE})
 
 add_executable(imapsync_ui main.cpp MainFrame.cpp VersionFinder.cpp VersionFinder.h ImapSyncCommand.cpp ImapSyncCommand.h MainFrameHandlers.cpp MainFrameHandlers.h)
+
 target_link_libraries(imapsync_ui PRIVATE ${wxWidgets_LIBRARIES})
 target_link_libraries(imapsync_ui PRIVATE nlohmann_json::nlohmann_json)
 
